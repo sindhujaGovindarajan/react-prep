@@ -1,10 +1,13 @@
 import React from "react";
-import "../App.css";
-import Todo from "./TodoItem";
+import styled from 'styled-components';
+import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
 import { addTodo, removeTodo, toggleTodoCompletion } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 
+const StyledUl = styled.ul`
+    padding:0
+`;
 const TodoList = () => {
     const todos = useSelector(({ todos }) => todos);
     const dispatch = useDispatch();
@@ -18,7 +21,7 @@ const TodoList = () => {
 
     const list = (
         todos.map((todo, index) => (
-            <Todo
+            <TodoItem
                 key={index}
                 index={index}
                 {...todo}
@@ -30,10 +33,12 @@ const TodoList = () => {
     const newToDo = <TodoForm addTodo={handleAddTodo} />;
 
     return (
-        <div className="todo-list">
-            {list}
+        <>
             {newToDo}
-        </div>
+            <StyledUl>
+                {list}
+            </StyledUl>
+        </>
     );
 }
 

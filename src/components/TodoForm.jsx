@@ -1,6 +1,14 @@
 import React from "react";
-import "../App.css";
+import styled from 'styled-components';
 
+const FormInput = styled.input`
+    outline: none;
+    font-size: 1em;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    width: 100%
+`;
 const TodoForm = ({ addTodo }) => {
     const [value, setValue] = React.useState("");
 
@@ -13,12 +21,13 @@ const TodoForm = ({ addTodo }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            Add ToDo &emsp;
-            <input
+            <FormInput
                 type="text"
                 className="input"
+                autoFocus={true}
                 value={value}
                 onChange={e => setValue(e.target.value)}
+                placeholder="Enter new todo"
             />
         </form>
     );

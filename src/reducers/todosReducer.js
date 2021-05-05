@@ -1,15 +1,13 @@
-const todosReducer = (todos = [], { type, payload: { text, index } = {} }) => {
-    let newTodos = [...todos];
+import { addTodo, removeTodo, toggleCompleted } from "../utils/todoOperationLogic";
 
+const todosReducer = (todos = [], { type, payload: { text, index } = {} }) => {
     switch (type) {
         case "ADD_TODO":
-            return [...todos, { text: text }];
+            return addTodo(todos, { text: text });
         case "REMOVE_TODO":
-            newTodos.splice(index, 1);
-            return newTodos;
+            return removeTodo(todos, index);
         case "TOGGLE_TODO_COMPLETION":
-            newTodos[index].isCompleted = !newTodos[index].isCompleted;
-            return newTodos;
+            return toggleCompleted(todos, index);
         default:
             return todos;
     }
